@@ -17,8 +17,10 @@ public class MainManager : MonoBehaviour
     private int m_Points;
     
     private bool m_GameOver = false;
+    public static MainManager Instance;
 
-    
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -40,6 +42,17 @@ public class MainManager : MonoBehaviour
 
     private void Update()
     {
+        if (Instance != null)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        Instance = this;
+        DontDestroyOnLoad(gameObject);
+
+        //LoadColor();
+
         if (!m_Started)
         {
             if (Input.GetKeyDown(KeyCode.Space))
